@@ -1,0 +1,41 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: P@$$w0rd
+      MYSQL_DATABASE: client-ms-ace
+    ports:
+      - "3306:3306"
+
+  eureka:
+    image: eureka-server-image
+    ports:
+      - "8761:8761"
+
+  gateway:
+    image: gateway-image
+    ports:
+      - "8888:8888"
+
+  client:
+    image: client-image
+    ports:
+      - "8090:8090"
+
+  voiture:
+    image: voiture-image
+    ports:
+      - "8089:8089"
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: P@$$w0rd
+    restart: always
+    ports:
+      - "8080:80"
